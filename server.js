@@ -11,10 +11,10 @@ const { createBootcamp, AddUserToBootcamp, findBootcampById, findAllBootcamps, u
 
 // NECESSARY ROUTES
 // CREATE USER: http://localhost:3000/user/create/Mateo/Díaz/mateo.diaz@correo.com
-app.get('/user/create/:firstname/:lastname/:email', async (req, res) => {
-	const { firstname, lastname, email } = req.params;
+app.get('/user/create/:firstName/:lastName/:email', async (req, res) => {
+	const { firstName, lastName, email } = req.params;
 	try {
-		const user = await createUser({ firstname, lastname, email });
+		const user = await createUser({ firstName, lastName, email });
 		res.status(StatusCodes.CREATED).json({
 			message: `🎉 Usuario ${user.email} fue creado con éxito`,
 			user: user,
@@ -31,7 +31,7 @@ app.get('/bootcamp/create/:title/:cue/:description', async (req, res) => {
 	try {
 		const bootcamp = await createBootcamp({ title, cue, description });
 		res.status(StatusCodes.CREATED).json({
-			message: `🎉 Bootcamp ${user.title} fue creado con éxito`,
+			message: `🎉 Bootcamp ${bootcamp.title} fue creado con éxito`,
 			bootcamp: bootcamp,
 		});
 	} catch (error) {
@@ -89,14 +89,14 @@ app.get('/users', async (req, res) => {
 });
 
 // UPDATE USER: http://localhost:3000/user/update/id/1/firstname/Pedro/lastname/Sánchez/email/pedro.sanchez@correo.com
-app.get('/user/update/id/:id/firstname/:firstname/lastname/:lastname/email/:email', async (req, res) => {
-	const { id, firstname, lastname, email } = req.params;
+app.get('/user/update/id/:id/firstname/:firstName/lastname/:lastName/email/:email', async (req, res) => {
+	const { id, firstName, lastName, email } = req.params;
 	Number(id);
 	try {
 		const updated = await updateUserById({
 			id,
-			firstname,
-			lastname,
+			firstName,
+			lastName,
 			email,
 		});
 
@@ -145,10 +145,11 @@ app.get('/bootcamp/findById/:id', async (req, res) => {
 	const id = Number(req.params.id);
 	try {
 		const bootcamp = await findBootcampById(id);
-		if (bootcamp === 'null') {
+		if (!bootcamp) {
 			res.status(StatusCodes.NOT_FOUND).json({
 				message: `🤷🏻‍♂️ Bootcamp id: ${id} no fue encontrado`,
 			});
+			return;
 		}
 		res.status(StatusCodes.OK).json({
 			message: `🎉 Bootcamp ${bootcamp.title} fue encontrado con éxito`,
@@ -173,7 +174,7 @@ app.get('/bootcamps', async (req, res) => {
 });
 
 // UPDATE BOOTCAMP: http://localhost:3000/bootcamp/update/id/1/title/Introduccion%20a%20TailwindCSS/cue/9/description/Tailwind%20personaliza%20componentes
-app.get('/bootcamp/update/id/:id/title/:tile/cue/:cue/description/:description', async (req, res) => {
+app.get('/bootcamp/update/id/:id/title/:title/cue/:cue/description/:description', async (req, res) => {
 	const { id, title, cue, description } = req.params;
 	Number(id);
 	try {
@@ -204,10 +205,11 @@ app.get('/bootcamp/delete/id/:id', async (req, res) => {
 	const id = Number(req.params.id);
 	try {
 		const deleted = await deleteBootcampById(id);
-		if (deleted === 'null') {
+		if (!deleted) {
 			res.status(StatusCodes.NOT_FOUND).json({
-				message: `🤷🏻‍♂️ Proyecto id: ${id} no fue encontrado`,
+				message: `🤷🏻‍♂️ Proyecto id: ${id} no existe`,
 			});
+			return;
 		}
 		res.status(StatusCodes.CREATED).json({
 			message: `🎉 Proyecto id: ${id} fue borrado con éxito`,

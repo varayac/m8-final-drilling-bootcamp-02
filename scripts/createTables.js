@@ -7,7 +7,7 @@ const sequelize = require('../app/config/db.config');
 		console.log('🎉 Tablas sincronizadas con éxito:');
 		console.log('     - user');
 		console.log('     - bootcamp');
-		console.log('     - user_bootcamp (middle table)');
+		console.log('     - user_bootcamp (n:n)');
 	} catch (error) {
 		console.log(error);
 	} finally {

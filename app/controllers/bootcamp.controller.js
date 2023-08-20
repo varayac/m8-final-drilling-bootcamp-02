@@ -8,6 +8,8 @@ const createBootcamp = async (newBootcamp) => {
 			cue: newBootcamp.cue,
 			description: newBootcamp.description,
 		});
+		console.log(`Se a añadido al usuario ${JSON.stringify(bootcamp, null, 4)}`);
+		return bootcamp;
 	} catch (error) {
 		console.log(error);
 		throw error;
@@ -45,7 +47,7 @@ const findBootcampById = async (id) => {
 				{
 					model: User,
 					as: 'user',
-					attributes: ['id', 'firstname', 'lastname', 'email'],
+					attributes: ['id', 'firstName', 'lastName', 'email'],
 					through: {
 						attributes: [],
 					},
@@ -67,7 +69,7 @@ const findAllBootcamps = async () => {
 				{
 					model: User,
 					as: 'user',
-					attributes: ['id', 'firstname', 'lastname', 'email'],
+					attributes: ['id', 'firstName', 'lastName', 'email'],
 					through: {
 						attributes: [],
 					},
@@ -85,16 +87,34 @@ const findAllBootcamps = async () => {
 // Update bootcamp
 const updateBootcampById = async (bootcamp) => {
 	try {
-		const updated = await Bootcamp.update(
-			{
-				name: bootcamp.name,
-			},
-			{
-				where: { id: bootcamp.id },
+		const updateBootcamp = await Bootcamp.findByPk(bootcamp.id);
+		let updated = [];
+
+		if (updateBootcamp) {
+			if (updateBootcamp.title !== bootcamp.title) {
+				updated = await Bootcamp.update({ title: bootcamp.title }, { where: { id: bootcamp.id } });
+				console.log(`Actualizados ${updated}`);
+				console.log(`Se ha actualizado el bootcamp con id: ${bootcamp.id}`);
+			} else {
+				updated[0] = -1;
 			}
-		);
-		console.log(`Actualizados ${updated}`);
-		console.log(`Bootcamp id: ${bootcamp.id} fue actualizado con éxito`);
+			if (updateBootcamp.cue !== bootcamp.cue) {
+				updated = await Bootcamp.update({ cue: bootcamp.cue }, { where: { id: bootcamp.id } });
+				console.log(`Actualizados ${updated}`);
+				console.log(`Se ha actualizado el bootcamp con id: ${bootcamp.id}`);
+			} else {
+				updated[0] = -1;
+			}
+			if (updateBootcamp.description !== bootcamp.description) {
+				updated = await Bootcamp.update({ description: bootcamp.description }, { where: { id: bootcamp.id } });
+				console.log(`Actualizados ${updated}`);
+				console.log(`Se ha actualizado el bootcamp con id: ${bootcamp.id}`);
+			} else {
+				updated[0] = -1;
+			}
+		} else {
+			updated[0] = 0;
+		}
 		return updated[0];
 	} catch (error) {
 		console.error(error);

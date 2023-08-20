@@ -4,8 +4,8 @@ const { User, Bootcamp } = require('../models');
 const createUser = async (newUser) => {
 	try {
 		const user = await User.create({
-			firstname: newUser.firstname,
-			lastname: newUser.lastname,
+			firstName: newUser.firstName,
+			lastName: newUser.lastName,
 			email: newUser.email,
 		});
 		console.log(`Se a añadido al usuario ${JSON.stringify(user, null, 4)}`);
@@ -68,15 +68,15 @@ const updateUserById = async (user) => {
 		let updated = [];
 
 		if (updateUser) {
-			if (updateUser.firstname !== user.firstname) {
-				updated = await User.update({ firstname: user.firstname }, { where: { id: user.id } });
+			if (updateUser.firstName !== user.firstName) {
+				updated = await User.update({ firstName: user.firstName }, { where: { id: user.id } });
 				console.log(`Actualizados ${updated}`);
 				console.log(`Se ha actualizado el usuario con id ${user.id}`);
 			} else {
 				updated[0] = -1;
 			}
-			if (updateUser.lastname !== user.lastname) {
-				updated = await User.update({ lastname: user.lastname }, { where: { id: user.id } });
+			if (updateUser.lastName !== user.lastName) {
+				updated = await User.update({ lastName: user.lastName }, { where: { id: user.id } });
 				console.log(`Actualizados ${updated}`);
 				console.log(`Se ha actualizado el usuario con id ${user.id}`);
 			} else {

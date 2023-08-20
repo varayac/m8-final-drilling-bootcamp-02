@@ -13,4 +13,7 @@ Bootcamp.belongsToMany(User, {
 	foreignKey: 'bootcamp_id',
 });
 
-module.exports = { User, Bootcamp };
+module.exports = {
+	User,
+	Bootcamp,
+};
