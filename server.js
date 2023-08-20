@@ -4,10 +4,20 @@ require('dotenv').config();
 const { StatusCodes } = require('http-status-codes');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const userRoutes = require('./app/routes/user.routes');
+const {
+	createBootcamp,
+	AddUserToBootcamp,
+	findBootcampById,
+	findAllBootcamps,
+	updateBootcampById,
+	deleteBootcampById,
+} = require('./app/controllers/bootcamp.controller');
 
-// CONTROLLERS
-const { createUser, findUserById, findAllUsers, updateUserById, deleteUserById } = require('./app/controllers/user.controller');
-const { createBootcamp, AddUserToBootcamp, findBootcampById, findAllBootcamps, updateBootcampById, deleteBootcampById } = require('./app/controllers/bootcamp.controller');
+// MIDDLEWARES
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api/user', userRoutes);
 
 // NECESSARY ROUTES
 // CREATE USER: http://localhost:3000/user/create/Mateo/Díaz/mateo.diaz@correo.com
@@ -50,94 +60,14 @@ app.get('/bootcamp/adduserbootcamp/idBootcamp/:idBootcamp/idUser/:idUser', async
 			user_bootcamp: user_bootcamp,
 		});
 	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			message: error.message,
+		});
 	}
 });
 // END NECESSARY ROUTES
 
 // USER ENDPOINTS
-// SEARCH USER: http://localhost:3000/user/findUserById/1
-app.get('/user/findUserById/:id', async (req, res) => {
-	const id = Number(req.params.id);
-	try {
-		const user = await findUserById(id);
-		if (user === 'null') {
-			res.status(StatusCodes.NOT_FOUND).json({
-				message: `🤷🏻‍♂️ Usuario id: ${id} no fue encontrado`,
-			});
-		}
-		res.status(StatusCodes.OK).json({
-			message: `🎉 Usuario ${user.email} econtrado con éxito`,
-			user: user,
-		});
-	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
-	}
-});
-
-// READ USERS: http://localhost:3000/users
-app.get('/users', async (req, res) => {
-	try {
-		const users = await findAllUsers();
-		res.status(StatusCodes.OK).json({
-			message: `🎉 Se encontraron ${users.length} usuarios`,
-			users: users,
-		});
-	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
-	}
-});
-
-// UPDATE USER: http://localhost:3000/user/update/id/1/firstname/Pedro/lastname/Sánchez/email/pedro.sanchez@correo.com
-app.get('/user/update/id/:id/firstname/:firstName/lastname/:lastName/email/:email', async (req, res) => {
-	const { id, firstName, lastName, email } = req.params;
-	Number(id);
-	try {
-		const updated = await updateUserById({
-			id,
-			firstName,
-			lastName,
-			email,
-		});
-
-		if (updated) {
-			if (updated !== -1) {
-				res.status(StatusCodes.CREATED).json({
-					message: `🎉 Usuario id: ${id} fue actualizado con éxito`,
-				});
-			} else {
-				res.status(StatusCodes.BAD_REQUEST).json({
-					message: `🥺 Usuario id: ${id} no fue actualizado. No había nada que actualizar.`,
-				});
-			}
-		} else {
-			res.status(StatusCodes.NOT_FOUND).json({
-				message: `🤷🏻‍♂️ Usuario id: ${id} no fue encontrado`,
-			});
-		}
-	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
-	}
-});
-
-// DELETE USER: http://localhost:3000/user/delete/id/1
-app.get('/user/delete/id/:id', async (req, res) => {
-	const id = Number(req.params.id);
-	try {
-		const deleted = await deleteUserById(id);
-		if (deleted === 'null') {
-			res.status(StatusCodes.NOT_FOUND).json({
-				message: `🤷🏻‍♂️ Usuario id:${id} no fue encontrado`,
-			});
-		}
-		res.status(StatusCodes.CREATED).json({
-			message: `🎉 Usuario id:${id} fue borrado con éxito`,
-			users: deleted,
-		});
-	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
-	}
-});
 
 // BOOTCAMP ENDPOINTS
 // SEARCH BOOTCAMP: http://localhost:3000/bootcamp/findById/1
@@ -196,7 +126,9 @@ app.get('/bootcamp/update/id/:id/title/:title/cue/:cue/description/:description'
 			});
 		}
 	} catch (error) {
-		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: error.message });
+		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+			message: error.message,
+		});
 	}
 });
 
