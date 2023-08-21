@@ -2,7 +2,7 @@ const { User, Bootcamp } = require('../models');
 const bcrypt = require('bcryptjs');
 
 // Create new user
-const createUser = async (newUser) => {
+/* const createUser = async (newUser) => {
 	try {
 		const user = await User.create({
 			firstName: newUser.firstName,
@@ -15,7 +15,7 @@ const createUser = async (newUser) => {
 		console.error(error);
 		throw error;
 	}
-};
+}; */
 
 // Search one user
 const findUserById = async (req, res) => {
@@ -162,7 +162,6 @@ const deleteUserById = async (req, res) => {
 };
 
 module.exports = {
-	createUser, // pendiente
 	findUserById,
 	findAllUsers,
 	updateUserById,

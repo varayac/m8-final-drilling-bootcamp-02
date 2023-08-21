@@ -9,56 +9,56 @@ const {
 	deleteBootcampById,
 } = require('../controllers/bootcamp.controller');
 
-/**
-CREATE BOOTCAMP:   http://localhost:3000/api/bootcamp/
-METHOD:            POST
+/** CREATE BOOTCAMP
+METHOD:  POST
+URL:     http://localhost:3000/api/bootcamp/
 BODY:
-   {
-     "title": "Introducción a TypeScript",
-     "cue": "9",
-     "description": "Lenguaje tipificado para JavaScript"
-   }
+         {
+         "title": "Introducción a TypeScript",
+         "cue": "9",
+         "description": "Lenguaje tipificado para JavaScript"
+         }
 */
 router.post('/', createBootcamp);
 
-/**
-ADD USER_BOOTCAMP:   http://localhost:3000/api/bootcamp/adduser/
-METHOD:              POST
+/** ADD USER TO BOOTCAMP
+METHOD:  POST
+URL:     http://localhost:3000/api/bootcamp/adduser/
 BODY:
-   {
-     "bootcampId": 1,
-     "userId": 1
-   }
+         {
+         "bootcampId": 1,
+         "userId": 1
+         }
 */
 router.post('/adduser', addUserToBootcamp);
 
-/**
-SEARCH BOOTCAMP:  http://localhost:3000/api/bootcamp/1
-METHOD:           GET
+/** SEARCH BOOTCAMP
+METHOD:  GET
+URL:     http://localhost:3000/api/bootcamp/1
 */
 router.get('/:id', findBootcampById);
 
-/**
-READ BOOTCAMP:    http://localhost:3000/api/bootcamp/
-METHOD:           GET
+/** READ BOOTCAMPS
+METHOD:  GET
+URL:     http://localhost:3000/api/bootcamp/
 */
 router.get('/', findAllBootcamps);
 
-/**
-UPDATE BOOTCAMP:   http://localhost:3000/api/bootcamp/1
-METHOD:            PUT
+/** UPDATE BOOTCAMP
+METHOD:  PUT
+URL:     http://localhost:3000/api/bootcamp/1
 BODY:
-   {
-     "title": "Introducción a TailwindCSS",
-     "cue": "7",
-     "description": "Personaliza coponentes con Tailwind"
-   }
+         {
+         "title": "Introducción a TailwindCSS",
+         "cue": "7",
+         "description": "Personaliza coponentes con Tailwind"
+         }
 */
 router.put('/:id', updateBootcampById);
 
-/**
-READ BOOTCAMP:    http://localhost:3000/api/bootcamp/1
-METHOD:           DELETE
+/** DELETE BOOTCAMP
+METHOD:  DELETE
+URL:     http://localhost:3000/api/bootcamp/1
 */
 router.delete('/:id', deleteBootcampById);
 

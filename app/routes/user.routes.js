@@ -1,41 +1,35 @@
 const express = require('express');
 const router = express.Router();
-const {
-	createUser,
-	findUserById,
-	findAllUsers,
-	updateUserById,
-	deleteUserById,
-} = require('../controllers/user.controller');
+const { findUserById, findAllUsers, updateUserById, deleteUserById } = require('../controllers/user.controller');
 
-/**
-READ USERS:    http://localhost:3000/api/user
-METHOD:        GET
+/** READ USERS
+METHOD:  GET
+URL:     http://localhost:3000/api/user
 */
 router.get('/', findAllUsers);
 
-/**
- SEARCH USER:  http://localhost:3000/api/user/1
- METHOD:       GET
+/** SEARCH USER
+METHOD:  GET
+URL:     http://localhost:3000/api/user/1
 */
 router.get('/:id', findUserById);
 
-/**
-UPDATE USER:   http://localhost:3000/api/user/1
-METHOD:        PUT
+/** UPDATE USER
+METHOD:  PUT
+URL:     http://localhost:3000/api/user/1
 BODY:
-   {
-     "firstName": "John",
-     "lastName": "Doe",
-     "email": "john.doe@test.com",
-     "password": "MiPassMayorA8Digitos"
-   }
+         {
+         "firstName": "John",
+         "lastName": "Doe",
+         "email": "john.doe@test.com",
+         "password": "MiPassMayorA8Digitos"
+         }
 */
 router.put('/:id', updateUserById);
 
-/**
- DELETE USER:  http://localhost:3000/api/user/1
- METHOD:       DELETE
+/** DELETE USER
+METHOD:  DELETE
+URL:     http://localhost:3000/api/user/1
 */
 router.delete('/:id', deleteUserById);
 
