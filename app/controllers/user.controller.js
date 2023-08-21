@@ -86,7 +86,7 @@ const updateUserById = async (req, res) => {
 			res.status(400).json({ message: `🥺 Todos los campos son requeridos` });
 			return;
 		}
-		if (password.length < 8) {
+		if (userIn.password.length < 8) {
 			res.status(400).json({ message: '🤔 La password debe tener mínimo 8 caracteres' });
 			return;
 		}

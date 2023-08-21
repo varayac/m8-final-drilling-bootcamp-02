@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { verifyToken } = require('../middlewares');
 const {
 	createBootcamp,
 	addUserToBootcamp,
@@ -8,6 +9,15 @@ const {
 	updateBootcampById,
 	deleteBootcampById,
 } = require('../controllers/bootcamp.controller');
+
+/** READ BOOTCAMPS
+METHOD:  GET
+URL:     http://localhost:3000/api/bootcamp/
+*/
+router.get('/', findAllBootcamps);
+
+// 👮🏻 MIDDLEWARE PARA AUTENTICAR
+router.use('/', verifyToken);
 
 /** CREATE BOOTCAMP
 METHOD:  POST
@@ -37,12 +47,6 @@ METHOD:  GET
 URL:     http://localhost:3000/api/bootcamp/1
 */
 router.get('/:id', findBootcampById);
-
-/** READ BOOTCAMPS
-METHOD:  GET
-URL:     http://localhost:3000/api/bootcamp/
-*/
-router.get('/', findAllBootcamps);
 
 /** UPDATE BOOTCAMP
 METHOD:  PUT
