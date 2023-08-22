@@ -134,6 +134,7 @@ const updateBootcampById = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const { title, cue, description } = req.body;
+		Number(cue);
 		if (!(id && title && cue && description)) {
 			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 			return;
@@ -144,6 +145,16 @@ const updateBootcampById = async (req, res) => {
 		let updated;
 
 		if (bootcamp) {
+			// pendiente
+			console.log('TITLE: ', title);
+			console.log('CUE: ', cue);
+			console.log('DESCRIPTION: ', description);
+			console.log('--------------------------------');
+			console.log('DB_TITLE: ', bootcamp.title);
+			console.log('DB_CUE: ', bootcamp.cue);
+			console.log('DB_DESCRIPTION: ', bootcamp.description);
+
+			// TODO: revisar esta validacion
 			if (bootcamp.title !== title || bootcamp.cue !== cue || bootcamp.description !== description) {
 				update = await Bootcamp.update(
 					{

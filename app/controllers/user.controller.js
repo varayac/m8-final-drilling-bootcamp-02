@@ -64,9 +64,7 @@ const findAllUsers = async (req, res) => {
 const updateUserById = async (req, res) => {
 	try {
 		const { id } = req.params;
-		// const userIn = req.body;
 		const { firstName, lastName, email, password } = req.body;
-
 		if (!(id && email && password && firstName && lastName)) {
 			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 			return;
@@ -118,7 +116,7 @@ const updateUserById = async (req, res) => {
 			return;
 		}
 		res.status(201).json({
-			message: `🎉 Usuario id: ${user.id} - ${user.email} fue actualizado con éxito`,
+			message: `🎉 Usuario id: ${user.id} - ${user.email} fue actualizado con éxito por: ${email}`,
 		});
 	} catch (error) {
 		console.error(error);
