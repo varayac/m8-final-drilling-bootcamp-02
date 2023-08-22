@@ -10,7 +10,8 @@ const bootcamps = [
 	{
 		title: 'Bootcamp Desarrollo Web Full Stack',
 		cue: 12,
-		description: 'Crearás aplicaciones web utilizando las tecnologías y lenguajes más actuales y populares, como: JavaScript, nodeJS, Angular, MongoDB, ExpressJS',
+		description:
+			'Crearás aplicaciones web utilizando las tecnologías y lenguajes más actuales y populares, como: JavaScript, nodeJS, Angular, MongoDB, ExpressJS',
 	},
 	{
 		title: 'Bootcamp Big Data, Inteligencia Artificial & Machine Learning',
@@ -23,7 +24,7 @@ const bootcamps = [
 (async () => {
 	try {
 		await Bootcamp.bulkCreate(bootcamps, { validate: true });
-		console.log('🎉 Bootcamps agregados exisotamente!!');
+		console.log('🎉 Bootcamps agregados éxitosamente!!');
 	} catch (error) {
 		console.error('🥺 ERROR al sincronizar bootcamps: ', error.message);
 	} finally {

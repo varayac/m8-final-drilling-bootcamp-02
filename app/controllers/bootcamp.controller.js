@@ -5,7 +5,7 @@ const createBootcamp = async (req, res) => {
 	try {
 		const { title, cue, description } = req.body;
 		if (!(title && cue && description)) {
-			res.status(400).json({ message: `🥺 Todos los campos son requeridos` });
+			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 			return;
 		}
 
@@ -17,7 +17,7 @@ const createBootcamp = async (req, res) => {
 			},
 		});
 		if (existBootcamp) {
-			res.status(401).json({ message: `🥺 El bootcamp ya éxiste, no se puede añadir` });
+			res.status(401).json({ message: '🥺 El bootcamp ya existe, no se puede añadir' });
 			return;
 		}
 
@@ -42,7 +42,7 @@ const addUserToBootcamp = async (req, res) => {
 	try {
 		const { bootcampId, userId } = req.body;
 		if (!(bootcampId && userId)) {
-			res.status(400).json({ message: `🥺 Todos los campos son requeridos` });
+			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 		}
 		const bootcamp = await Bootcamp.findByPk(bootcampId);
 		if (!bootcamp) {
@@ -75,7 +75,7 @@ const findBootcampById = async (req, res) => {
 	try {
 		const { id } = req.params;
 		if (!id) {
-			res.status(400).json({ message: `🥺 Id requerido` });
+			res.status(400).json({ message: '🥺 Id requerido' });
 		}
 		const bootcamp = await Bootcamp.findByPk(id, {
 			include: [
@@ -135,7 +135,7 @@ const updateBootcampById = async (req, res) => {
 		const { id } = req.params;
 		const { title, cue, description } = req.body;
 		if (!(id && title && cue && description)) {
-			res.status(400).json({ message: `🥺 Todos los campos son requeridos` });
+			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 			return;
 		}
 

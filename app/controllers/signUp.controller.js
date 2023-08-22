@@ -34,7 +34,7 @@ const createUser = async (req, res) => {
 		console.log(`🪪 Token generado: ${token}`);
 		console.log(`Usuario registrado: ${JSON.stringify(user, null, 4)}`);
 		res.status(201).json({
-			message: `🎉 Usuario ${user.email} creado y registrado con éxito`,
+			message: `🎉 Usuario ${user.email} registrado con éxito`,
 			user,
 			token,
 		});

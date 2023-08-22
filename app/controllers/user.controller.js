@@ -1,22 +1,6 @@
 const { User, Bootcamp } = require('../models');
 const bcrypt = require('bcryptjs');
 
-// Create new user
-/* const createUser = async (newUser) => {
-	try {
-		const user = await User.create({
-			firstName: newUser.firstName,
-			lastName: newUser.lastName,
-			email: newUser.email,
-		});
-		console.log(`Se a añadido al usuario ${JSON.stringify(user, null, 4)}`);
-		return user;
-	} catch (error) {
-		console.error(error);
-		throw error;
-	}
-}; */
-
 // Search one user
 const findUserById = async (req, res) => {
 	try {
@@ -35,13 +19,13 @@ const findUserById = async (req, res) => {
 		});
 
 		if (!user) {
-			res.status(404).json({ message: `🤷🏻‍♂️ Usuario id: ${id} no fue encontrado` });
+			res.status(404).json({ message: `🥺 Usuario id: ${id} no fue encontrado` });
 			return;
 		}
 
 		console.log(`Se ha encontrado al usuario ${JSON.stringify(user, null, 4)}`);
 		res.status(200).json({
-			message: `🎉 Usuario ${user.email} econtrado con éxito`,
+			message: `🎉 Usuario ${user.email} encontrado con éxito`,
 			user: user,
 		});
 	} catch (error) {
@@ -80,13 +64,14 @@ const findAllUsers = async (req, res) => {
 const updateUserById = async (req, res) => {
 	try {
 		const { id } = req.params;
-		const userIn = req.body;
+		// const userIn = req.body;
+		const { firstName, lastName, email, password } = req.body;
 
-		if (!(id && userIn.email && userIn.password && userIn.firstName && userIn.lastName)) {
-			res.status(400).json({ message: `🥺 Todos los campos son requeridos` });
+		if (!(id && email && password && firstName && lastName)) {
+			res.status(400).json({ message: '🥺 Todos los campos son requeridos' });
 			return;
 		}
-		if (userIn.password.length < 8) {
+		if (password.length < 8) {
 			res.status(400).json({ message: '🤔 La password debe tener mínimo 8 caracteres' });
 			return;
 		}
@@ -97,19 +82,19 @@ const updateUserById = async (req, res) => {
 		if (user) {
 			const salt = await bcrypt.genSalt(10);
 			console.log('🈵SALT: ', salt);
-			const encryptedPassword = await bcrypt.hash(userIn.password, salt);
+			const encryptedPassword = await bcrypt.hash(password, salt);
 
 			if (
-				user.firstName !== userIn.firstName ||
-				user.lastName !== userIn.lastName ||
-				user.email !== userIn.email ||
+				user.firstName !== firstName ||
+				user.lastName !== lastName ||
+				user.email !== email ||
 				user.password !== encryptedPassword
 			) {
 				update = await User.update(
 					{
-						firstName: userIn.firstName,
-						lastName: userIn.lastName,
-						email: userIn.email,
+						firstName,
+						lastName,
+						email: email.toLowerCase(),
 						password: encryptedPassword,
 					},
 					{
@@ -149,7 +134,7 @@ const deleteUserById = async (req, res) => {
 			where: { id },
 		});
 		if (!deleted) {
-			res.status(404).json({ message: `🤷🏻‍♂️ Usuario id: ${id} no fue encontrado` });
+			res.status(404).json({ message: `🥺 Usuario id: ${id} no fue encontrado` });
 			return;
 		}
 		console.log(`Borrado: ${deleted}`);

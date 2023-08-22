@@ -11,7 +11,7 @@ const verifyToken = async (req, res, next) => {
 		token = req.body.token || req.query.token;
 	}
 	if (!token) {
-		res.status(403).json({ message: ' 👮🏻 Token es requerido para la autorización' });
+		res.status(403).json({ message: '👮🏻 Acceso restringido, 🪪 token es requerido!' });
 		return;
 	}
 	try {

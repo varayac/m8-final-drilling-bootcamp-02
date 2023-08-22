@@ -8,7 +8,7 @@ const verifySignUp = async (req, res, next) => {
 			return;
 		}
 		if (password.length < 8) {
-			res.status(400).json({ message: `👮🏻 La contraseña debe ser mayor a 8 digitos` });
+			res.status(400).json({ message: `👮🏻 La password debe tener mínimo 8 caracteres` });
 			return;
 		}
 		try {
@@ -20,7 +20,7 @@ const verifySignUp = async (req, res, next) => {
 
 			if (existUser) {
 				res.status(401).json({
-					message: `🤔 El usuario ya existe, inicie sesion: http://localhost:3000/api/signin/`,
+					message: `🤔 El usuario ya existe, inicie sesión: http://localhost:3000/api/signin/`,
 				});
 				return;
 			}

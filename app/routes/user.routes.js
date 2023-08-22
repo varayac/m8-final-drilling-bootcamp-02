@@ -19,10 +19,10 @@ METHOD:  PUT
 URL:     http://localhost:3000/api/user/1
 BODY:
          {
-         "firstName": "John",
-         "lastName": "Doe",
-         "email": "john.doe@test.com",
-         "password": "MiPassMayorA8Digitos"
+         "firstName": "Pedro",
+         "lastName": "Sánchez",
+         "email": "pedro.sanchez@correo.com",
+         "password": "pedro123456"
          }
 */
 router.put('/:id', updateUserById);

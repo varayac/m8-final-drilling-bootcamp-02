@@ -25,7 +25,7 @@ URL:     http://localhost:3000/api/bootcamp/
 BODY:
          {
          "title": "Introducción a TypeScript",
-         "cue": "9",
+         "cue": 9,
          "description": "Lenguaje tipificado para JavaScript"
          }
 */
@@ -54,8 +54,8 @@ URL:     http://localhost:3000/api/bootcamp/1
 BODY:
          {
          "title": "Introducción a TailwindCSS",
-         "cue": "7",
-         "description": "Personaliza coponentes con Tailwind"
+         "cue": 7,
+         "description": "Personaliza componentes con Tailwind"
          }
 */
 router.put('/:id', updateBootcampById);

@@ -1,6 +1,6 @@
 # Prueba Final Modulo 8 - Cursos Bootcamp - Parte 2
 
-Este proyecto corresponde a la prueba final del modulo 8, continuacion de modulo 7 - Implementación de API backend Node Express - **Desarrollo de Aplicaciones Full Stack JavaScript Trainee v2.0 Vespertino**.
+Este proyecto corresponde a la prueba final del modulo 8, continuación de modulo 7 - Implementación de API backend Node Express - **Desarrollo de Aplicaciones Full Stack JavaScript Trainee v2.0 Vespertino**.
 
 ### Ejercicio Propuesto 🚀
 
@@ -32,7 +32,7 @@ La API debe proveer las siguientes endpoint:
 
 ### Requerimientos ⚙️
 
-1. Adecuar el proyecto y el código que se realizó en el primer sprint, el cual se adjunta en el repositorio: [m7-final-drilling-bootcamp-01](https://github.com/varayac/m7-final-drilling-bootcamp-01), con la finalidad de que se adecue, mejoré y construya una API RESTful para el bootcamp según las rutas antes mencionadas.
+1. Adecuar el proyecto y el código que se realizó en el primer sprint, el cual se adjunta en el repositorio: [m7-final-drilling-bootcamp-01](https://github.com/varayac/m7-final-drilling-bootcamp-01), con la finalidad de que se adecué, mejoré y construya una API RESTful para el bootcamp según las rutas antes mencionadas.
 2. Se implementa haciendo uso de las siguientes dependencias: `express, sequelize, pg, pg-hstore, cors, JWT(jsonwebtoken) y bcryptjs`.
 3. Crear dentro de la carpeta config, el archivo db.config.js, que posee la configuración a la base de datos, el nombre de la base de datos es: `db_jwtbootcamp`.
 4. Dentro de la carpeta models, se encuentran los modelos tanto para el usuario (user.model.js) como para el bootcamp (bootcamp.model.js). El archivo index.js define la conexión con sequelize a la base de datos y modelos (ejecuta relaciones).
@@ -96,54 +96,58 @@ La estructura final es la siguiente:
 
 8. Finalmente para verificar los modelos y las relaciones con sus métodos y los endpoint se hace uso de la herramienta Postman.
 
-NOTA: estos datos se pueden ingresar mediante scripts:
+    #### Crear los siguientes usuarios:
 
-Crear los siguientes usuarios:
+    | firstName | lastName  | email                        | password       |
+    | --------- | --------- | ---------------------------- | -------------- |
+    | Mateo     | Díaz      | mateo.diaz@correo.com        | mateo123456    |
+    | Santiago  | Mejías    | santiago.mejias@correo.com   | santiago123456 |
+    | Lucas     | Rojas     | lucas.rojas@correo.com       | lucas123456    |
+    | Facundo   | Fernandez | facundo.fernandez@correo.com | facundo123456  |
 
-| firstName | lastName  | email                        | password       |
-| --------- | --------- | ---------------------------- | -------------- |
-| Mateo     | Díaz      | mateo.diaz@correo.com        | mateo123456    |
-| Santiago  | Mejías    | santiago.mejias@correo.com   | santiago123456 |
-| Lucas     | Rojas     | lucas.rojas@correo.com       | lucas123456    |
-| Facundo   | Fernandez | facundo.fernandez@correo.com | facundo123456  |
+    - Los user se pueden ingresar mediante el scrip: `npm run sync-users`
 
-Crear los siguientes Bootcamp:
+    #### Crear los siguientes Bootcamp:
 
-| title                                                          | cue | description                                                                                                                                                          |
-| -------------------------------------------------------------- | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Introduciendo El Bootcamp De React.                            | 10  | React es la librería más usada en JavaScript para el desarrollo de interfaces.                                                                                       |
-| Bootcamp Desarrollo Web Full Stack.                            | 12  | Crearás aplicaciones web utilizando las tecnologías y lenguajes más actuales y populares, como: JavaScript, nodeJS, Angular MongoDB, ExpressJS.                      |
-| Bootcamp Big Data, Inteligencia Artificial & Machine Learning. | 18  | Domina Data Science, y todo el ecosistema de lenguajes y herramientas de Big Data, e intégralos con modelos avanzados de Artificial Intelligence y Machine Learning. |
+    | title                                                          | cue | description                                                                                                                                                           |
+    | -------------------------------------------------------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | Introduciendo El Bootcamp De React.                            | 10  | React es la librería más usada en JavaScript para el desarrollo de interfaces.                                                                                        |
+    | Bootcamp Desarrollo Web Full Stack.                            | 12  | Crearás aplicaciones web utilizando las tecnologías y lenguajes más actuales y populares, como: JavaScript, nodeJS, Angular MongoDB, ExpressJS.                       |
+    | Bootcamp Big Data, Inteligencia Artificial & Machine Learning. | 18  | Domina Data Science, y todo el ecosistema de lenguajes y herramientas de Big Data, e integrarlos con modelos avanzados de Artificial Intelligence y Machine Learning. |
 
-Agregar los siguientes usuarios al Bootcamp:
+    - Los bootcamp se pueden ingresar mediante el scrip: `npm run sync-bootcamps`
 
-| title                                                          | users                                    |
-| -------------------------------------------------------------- | ---------------------------------------- |
-| Introduciendo El Bootcamp De React.                            | Mateo Díaz, Santiago Mejías              |
-| Bootcamp Desarrollo Web Full Stack.                            | Mateo Díaz                               |
-| Bootcamp Big Data, Inteligencia Artificial & Machine Learning. | Mateo Díaz, Santiago Mejías, Lucas Rojas |
+    #### Agregar los siguientes usuarios al Bootcamp:
+
+    | title                                                          | users                                    |
+    | -------------------------------------------------------------- | ---------------------------------------- |
+    | Introduciendo El Bootcamp De React.                            | Mateo Díaz, Santiago Mejías              |
+    | Bootcamp Desarrollo Web Full Stack.                            | Mateo Díaz                               |
+    | Bootcamp Big Data, Inteligencia Artificial & Machine Learning. | Mateo Díaz, Santiago Mejías, Lucas Rojas |
+
+    - Las relaciones se pueden ingresar mediante el scrip: `npm run sync-user-bootcamp`
 
 ---
 
-## RESPUESTAS:
+## PRE AJUSTES:
 
-### Preparacion en Base de Datos PostgreSQL 💾
+### Preparación de la Base de Datos en PostgreSQL 💾
 
-Creacion de role `bootcamp_user` en PosgreSQL CLI.
+Creación de role `bootcamp_user` en PosgreSQL CLI.
 
 ```shell
 CREATE USER bootcamp_user WITH PASSWORD '1234';
 ```
 
-Creacion de Base de datos `db_bootcamp` y asignación de role.
+Creación de Base de datos `db_jwtbootcamp` y asignación de role.
 
 ```shell
 CREATE DATABASE db_jwtbootcamp OWNER bootcamp_user;
 ```
 
-### Ejecución Servidor 🤖
+### Ejecutar Servidor 🤖
 
-IMPORTANTE: Se debe customizar previamente el archivo `.env`.
+#### 🚩🚩 IMPORTANTE!!: Se debe editar previamente el archivo `.env`.
 
 Instalación:
 
@@ -157,9 +161,9 @@ Ejecución de servidor en unix:
 npm run dev
 ```
 
-### Sincronización con la base de datos medante scripts
+### Sincronización de values en la base de datos mediante scripts
 
-`npm run sync-db` = Inserción de modelos definidos en la base de datos.
+`npm run sync-db` = Inserción de modelos definidos, en la base de datos.
 
 `npm run sync-users` = Inserción de usuarios en la entidad user.
 
@@ -167,9 +171,32 @@ npm run dev
 
 `npm run sync-user-bootcamp` = Inserción de relaciones en la entidad user_bootcamp.
 
+## RESPUESTAS:
+
 ### Realizar las siguientes consultas (Postman / Thunder Client):
 
--   Iniciar sesión con usuario (email y contraseña) no registrado, por ejemplo:
+**NOTA: Una vez registrado o logeado, tiene 5 minutos para manipular los endpoints antes de que caduque el token. Puede utilizar el token mediante `params` en la URL, `Authorization` en Header o `Bearer` en Auth.** 👍🏼
+
+-   #### `POST` Registrar nuevo usuario:
+
+    ```
+    http://localhost:3000/api/signup/
+    ```
+
+    ```json
+    {
+    	"firstName": "John",
+    	"lastName": "Doe",
+    	"email": "john.doe@correo.com",
+    	"password": "john123456"
+    }
+    ```
+
+-   #### `POST` Iniciar sesión con usuario (email y contraseña) no registrado:
+
+    ```
+    http://localhost:3000/api/signin/
+    ```
 
     ```json
     {
@@ -178,7 +205,11 @@ npm run dev
     }
     ```
 
--   Iniciar sesión con usuario (email y contraseña) registrado, por ejemplo:
+-   #### `POST` Iniciar sesión con usuario (email y contraseña) registrado:
+
+    ```
+    http://localhost:3000/api/signin/
+    ```
 
     ```json
     {
@@ -187,54 +218,55 @@ npm run dev
     }
     ```
 
--   Listar todos los usuarios con sus bootcamp.
+-   #### `GET` Listar todos los usuarios con sus bootcamp.
 
     ```
-    http://localhost:3000/user
+    http://localhost:3000/api/user/
     ```
 
--   Listar el usuario con el id 3
+-   #### `GET` Listar el usuario con el id=3
 
     ```
-    http://localhost:3000/findUserById/3
+    http://localhost:3000/api/user/3
     ```
 
--   Actualizar el usuario según su id; por ejemplo: actualizar el usuario con id=1 por Pedro
-    Sánchez.
+-   #### `PUT` Actualizar el usuario con id=1 por Pedro Sánchez.
 
     ```
-    http://localhost:3000/update/id/1/firstname/Pedro/lastname/Sánchez/email/pedro.sanchez@correo.com
+    http://localhost:3000/api/user/1
     ```
 
--   Eliminar un usuario por id; por ejemplo: el usuario con id=1.
-
-    ```
-    http://localhost:3000/delete/id/1
-    ```
-
--   Consulta el Bootcamp por id, incluyendo los usuarios registrados.
-
-    ```
-    http://localhost:3000/findById/1
+    ```json
+    {
+    	"firstName": "Pedro",
+    	"lastName": "Sánchez",
+    	"email": "pedro.sanchez@correo.com",
+    	"password": "pedro123456"
+    }
     ```
 
--   Listar todos los Bootcamp con sus usuarios.
+-   #### `DELETE` Eliminar el usuario con id=1.
 
     ```
-    http://localhost:3000/bootcamp
+    http://localhost:3000/api/user/1
     ```
 
--   Consultar un usuario por id incluyendo los bootcamp.
+-   #### `GET` Consultar Bootcamp por id, incluyendo los usuarios registrados.
 
     ```
-    http://localhost:3000/findUserById/1
-    ??
+    http://localhost:3000/api/bootcamp/1
     ```
 
--   Gestione adecuadamente el manejo de errores.
+-   #### `GET` Listar todos los Bootcamp con sus usuarios.
 
     ```
-    ??
+    http://localhost:3000/api/bootcamp/
+    ```
+
+-   #### `GET` Consultar un usuario por id incluyendo los bootcamp.
+
+    ```
+    http://localhost:3000/api/user/2
     ```
 
 ---

@@ -9,8 +9,8 @@ BODY:
          {
          "firstName": "John",
          "lastName": "Doe",
-         "email": "john.doe@test.com",
-         "password": "Pass>a6DigitosConÑ"
+         "email": "john.doe@correo.com",
+         "password": "john123456"
          }
 */
 router.post('/', createUser);

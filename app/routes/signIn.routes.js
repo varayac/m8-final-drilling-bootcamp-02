@@ -7,8 +7,8 @@ METHOD:  POST
 URL:     http://localhost:3000/api/signin/
 BODY:
          {
-         "email": "john.doe@test.com",
-         "password": "Pass>a6DigitosConÑ"
+         "email": "mateo.diaz@correo.com",
+         "password": "mateo123456"
          }
 */
 router.post('/', login);
